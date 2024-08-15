@@ -1,5 +1,7 @@
 # Emoji Riddle 🎉
 
+![Game Play Screen](screenshots/play.png)
+
 Welcome to **Emoji Riddle** – a fun and interactive web app where you guess the word, phrase, or title based on emojis! 🧩
 
 ## Overview
