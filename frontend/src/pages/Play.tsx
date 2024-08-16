@@ -25,6 +25,9 @@ const riddles = {
 
 const Play = () => {
   {
+    /* Fetch riddles from MongoDB */
+  }
+  {
     /* Get keys for all objects */
   }
   const riddleKeys = Object.keys(riddles);
