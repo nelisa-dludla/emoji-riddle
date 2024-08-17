@@ -12,8 +12,14 @@ router.get("/", async (req, res) => {
     console.log("Connected to MongoDB");
 
     const collection = client.db("emoji_riddle").collection("riddles");
-    const riddles = await collection.find({}).toArray();
-    res.status(200).json(riddles);
+    const riddlesArray = await collection.find({}).toArray();
+
+    const riddlesObject = riddlesArray.reduce((acc, riddle) => {
+      acc[riddle._id] = riddle;
+      return acc;
+    });
+
+    res.status(200).json(riddlesObject);
   } catch (error) {
     console.log("Connection error: ", error);
   } finally {
