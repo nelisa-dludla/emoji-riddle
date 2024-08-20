@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 interface ResultsProps {
@@ -6,6 +7,14 @@ interface ResultsProps {
 }
 
 const Results: React.FC<ResultsProps> = ({ score, resetGame }) => {
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
     <>
       {/* Transparent Background */}
