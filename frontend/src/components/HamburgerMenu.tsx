@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const HamburgerMenu = ({setIsOpen}) => {
+interface HamburgerProps {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const HamburgerMenu: React.FC<HamburgerProps> = ({setIsOpen}) => {
   const handleClick = () => {
     setIsOpen(false);
   };

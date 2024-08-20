@@ -2,7 +2,23 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Results from "../components/Results";
 
-const knuthShuffle = (arr) => {
+interface Riddle {
+  emojis: string;
+  answer: string;
+  hint: string;
+  difficulty: "easy" | "medium" | "hard";
+}
+
+interface RiddlesData {
+  [key: string]: Riddle;
+}
+
+interface GamePlayProps {
+  riddles: RiddlesData;
+  setLoadingRiddles: React.Dispatch< React.SetStateAction<Boolean>>;
+}
+
+const knuthShuffle = (arr: string[]) => {
     var rand, temp, i;
  
     for (i = arr.length - 1; i > 0; i -= 1) {
@@ -14,7 +30,7 @@ const knuthShuffle = (arr) => {
     return arr;
 }
 
-const GamePlay = ({ riddles, setLoadingRiddles }) => {
+const GamePlay: React.FC<GamePlayProps> = ({ riddles, setLoadingRiddles }) => {
   {
     /* Get keys for all objects */
   }

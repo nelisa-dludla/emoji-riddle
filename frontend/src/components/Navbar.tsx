@@ -6,7 +6,7 @@ import { useState } from "react";
 import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleClick = () => {
     setIsOpen(true);
   };

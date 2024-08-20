@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
-const Results = ({ score, resetGame }) => {
+interface ResultsProps {
+  score: number;
+  resetGame: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const Results: React.FC<ResultsProps> = ({ score, resetGame }) => {
   return (
     <>
       {/* Transparent Background */}
