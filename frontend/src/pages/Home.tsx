@@ -9,7 +9,7 @@ const Home = () => {
         <Navbar />
         <section id="home" className="flex flex-col md:flex-row sm:h-screen items-center">
           {/* LHS */}
-          <div className="p-6 mt-10 mb:mt-0">
+          <div className="p-6 mt-5 mb:mt-0">
             <h2 className="bg-white font-bold text-lg md:text-4xl p-4 mb-7 s🕵️‍♂️hadow-xl inline-block">
               Decode the emojis, crack the riddle! 🧩
             </h2>
@@ -32,7 +32,7 @@ const Home = () => {
           {/* RHS */}
           <div className="p-6">
             <Link to="/play">
-              <button className="bg-green-400 text-lg md:text-2xl font-bold p-7 shadow-xl btn">
+              <button className="bg-green-400 text-lg md:text-2xl font-bold p-4 md:p-7 shadow-xl btn">
                 Start Playing 🎮
               </button>
             </Link>

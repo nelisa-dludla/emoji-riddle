@@ -54,7 +54,7 @@ const HowToPlay = () => {
           <div></div>
           <div></div>
           <Link to="/play">
-            <button className="bg-green-400 font-bold text-lg md:text-2xl p-7 my-16 shadow-xl btn">
+            <button className="bg-green-400 font-bold text-lg md:text-2xl p-4 md:p-7 my-16 shadow-xl btn">
               Start Playing 🎮
             </button>
           </Link>
