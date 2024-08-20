@@ -2,19 +2,33 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Results from "../components/Results";
 
-const GamePlay = ({riddles, setLoadingRiddles}) => {
+const knuthShuffle = (arr) => {
+    var rand, temp, i;
+ 
+    for (i = arr.length - 1; i > 0; i -= 1) {
+        rand = Math.floor((i + 1) * Math.random());//get random between zero and i (inclusive)
+        temp = arr[rand];//swap i and the zero-indexed number
+        arr[rand] = arr[i];
+        arr[i] = temp;
+    }
+    return arr;
+}
+
+const GamePlay = ({ riddles, setLoadingRiddles }) => {
   {
     /* Get keys for all objects */
   }
   //console.log(data);
   const riddleKeys = Object.keys(riddles);
+  const randomizedRiddleKeys = knuthShuffle(riddleKeys);
   /* Score */
   const [score, setScore] = useState(0);
-  /* Current Index of riddleKeys */
-  let [currentKeyIndex, setCurrentKeyIndex] = useState(1);
+  /* Current Index of randomizedRiddleKeys */
+  let [currentKeyIndex, setCurrentKeyIndex] = useState(0);
+
   /* Current Riddle Key
    */ const [currentRiddleKey, setCurrentRiddleKey] = useState(
-    riddleKeys[currentKeyIndex],
+    randomizedRiddleKeys[currentKeyIndex],
   );
   /* Current Riddle */
   const [currentRiddle, setCurrentRiddle] = useState(riddles[currentRiddleKey]);
@@ -24,7 +38,7 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
   const [feedback, setFeedback] = useState("");
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const [isHintVisible, setIsHintVisible] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(10);
+  const [timeLeft, setTimeLeft] = useState(60);
   let timerId = useRef(null);
   const [gameOver, setGameOver] = useState(false);
 
@@ -53,8 +67,8 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
     setCurrentKeyIndex((prevIndex) => {
       const newIndex = 0;
 
-      setCurrentRiddleKey(riddleKeys[newIndex]);
-      setCurrentRiddle(riddles[riddleKeys[newIndex]]);
+      setCurrentRiddleKey(randomizedRiddleKeys[newIndex]);
+      setCurrentRiddle(riddles[randomizedRiddleKeys[newIndex]]);
 
       return newIndex;
     });
@@ -62,7 +76,7 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
     setFeedback("");
     setIsFeedbackVisible(false);
     setIsHintVisible(false);
-    setTimeLeft(10);
+    setTimeLeft(60);
     setGameOver(false);
     setLoadingRiddles(true);
   };
@@ -86,13 +100,13 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
       setIsHintVisible(false);
       setIsFeedbackVisible(true);
       setFeedback("Correct! 🎉");
-      /* Increase index only for the size of riddleKeys */
+      /* Increase index only for the size of randomizedRiddleKeys */
       setCurrentKeyIndex((prevIndex) => {
         const newIndex = prevIndex + 1;
 
-        if (newIndex < riddleKeys.length) {
-          setCurrentRiddleKey(riddleKeys[newIndex]);
-          setCurrentRiddle(riddles[riddleKeys[newIndex]]);
+        if (newIndex < randomizedRiddleKeys.length) {
+          setCurrentRiddleKey(randomizedRiddleKeys[newIndex]);
+          setCurrentRiddle(riddles[randomizedRiddleKeys[newIndex]]);
         }
 
         return newIndex;
@@ -125,58 +139,59 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
           {gameOver && <Results score={score} resetGame={resetGame} />}
           {/* Top */}
           <div className="grid grid-cols-2 gap-4">
-            <p className="font-bold text-3xl">
+            <p className="font-bold text-md md:text-3xl">
               Time:{" "}
               <span className="bg-white p-3 ml-4 shadow-xl inline-block">
                 {formatTime(timeLeft)}
               </span>
             </p>
-            <p className="font-bold text-3xl text-right">
+            <p className="font-bold text-md md:text-3xl text-right">
               Score:{" "}
               <span className="bg-white p-3 ml-4 shadow-xl inline-block">
                 {score}
               </span>
             </p>
-            <p className="font-bold text-3xl">
+            <p className="font-bold text-md md:text-3xl h-fit flex md:flex-none">
               Difficulty:{" "}
               <span className="bg-white p-3 ml-4 shadow-xl inline-block">
-                {currentRiddle.difficulty.charAt(0).toUpperCase() + currentRiddle.difficulty.slice(1)}
+                {currentRiddle.difficulty.charAt(0).toUpperCase() +
+                  currentRiddle.difficulty.slice(1)}
               </span>
             </p>
             <Link className="ml-auto" to="/home">
-              <button className="bg-red-500 font-bold text-xl p-4 shadow-xl max-w-24 btn">
+              <button className="bg-red-500 font-bold text-md md:text-xl p-4 shadow-xl max-w-24 btn">
                 Quit
               </button>
             </Link>
           </div>
           {/* Middle */}
-          <div className="mt-28 max-w-3xl mx-auto">
-            <p className="bg-white shadow-xl p-20 text-9xl text-center">
+          <div className="mt-20 md:mt-28 max-w-3xl mx-auto">
+            <p className="bg-white shadow-xl p-20 text-5xl md:text-9xl text-center">
               {currentRiddle.emojis}
             </p>
           </div>
 
           {/* Feedback */}
-          <div className="mt-16 text-center font-bold text-4xl">
+          <div className="mt-16 text-center font-bold text-xl md:text-4xl">
             {isFeedbackVisible && feedback}
           </div>
           {/* Hint */}
-          <div className="my-16 text-center p-2 text text-xl">
+          <div className="my-10 md:my-16 text-center p-2 text md:text-xl">
             <i>{isHintVisible && `"${currentRiddle.hint}"`}</i>
           </div>
 
           {/* Bottom */}
           <div className="flex mb-24">
-            <div className="flex flex-row mx-auto">
+            <div className="flex md:flex-row mx-auto">
               <button
                 onClick={handleClick}
-                className="bg-gray-400 font-bold text-xl p-4 shadow-xl btn"
+                className="bg-gray-400 font-bold text-md md:text-xl p-4 shadow-xl btn"
               >
                 Hint
               </button>
               <form className="flex flex-row" onSubmit={handleSubmit} action="">
                 <input
-                  className="bg-white p-4 mx-5 text-xl shadow-xl w-full"
+                  className="bg-white p-4 mx-5 text-md md:text-xl shadow-xl w-full"
                   type="text"
                   name="answer"
                   value={playerAnswer}
@@ -184,7 +199,7 @@ const GamePlay = ({riddles, setLoadingRiddles}) => {
                   placeholder="Your answer goes here..."
                 />
                 <button
-                  className="bg-green-400 font-bold text-xl p-4 shadow-xl btn"
+                  className="bg-green-400 font-bold text-md md:text-xl p-4 shadow-xl btn"
                   type="submit"
                 >
                   Submit

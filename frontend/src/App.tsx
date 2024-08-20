@@ -7,7 +7,6 @@ import "./App.css";
 }
 import Home from "./pages/Home";
 import HowToPlay from "./pages/HowToPlay";
-import Leaderboard from "./pages/Leaderboard";
 import Play from "./pages/Play";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/how-to-play" element={<HowToPlay />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/play" element={<Play />} />
         </Routes>
       </BrowserRouter>
