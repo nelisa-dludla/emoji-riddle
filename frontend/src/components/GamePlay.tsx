@@ -15,20 +15,20 @@ interface RiddlesData {
 
 interface GamePlayProps {
   riddles: RiddlesData;
-  setLoadingRiddles: React.Dispatch< React.SetStateAction<Boolean>>;
+  setLoadingRiddles: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const knuthShuffle = (arr: string[]) => {
-    var rand, temp, i;
- 
-    for (i = arr.length - 1; i > 0; i -= 1) {
-        rand = Math.floor((i + 1) * Math.random());//get random between zero and i (inclusive)
-        temp = arr[rand];//swap i and the zero-indexed number
-        arr[rand] = arr[i];
-        arr[i] = temp;
-    }
-    return arr;
-}
+  var rand, temp, i;
+
+  for (i = arr.length - 1; i > 0; i -= 1) {
+    rand = Math.floor((i + 1) * Math.random()); //get random between zero and i (inclusive)
+    temp = arr[rand]; //swap i and the zero-indexed number
+    arr[rand] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
+};
 
 const GamePlay: React.FC<GamePlayProps> = ({ riddles, setLoadingRiddles }) => {
   {
@@ -55,14 +55,16 @@ const GamePlay: React.FC<GamePlayProps> = ({ riddles, setLoadingRiddles }) => {
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const [isHintVisible, setIsHintVisible] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
-  let timerId = useRef(null);
+  let timerId = useRef<number | null>(null);
   const [gameOver, setGameOver] = useState(false);
 
   const startTimer = () => {
     timerId.current = setInterval(() => {
       setTimeLeft((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(timerId.current);
+          if (timerId.current) {
+            clearInterval(timerId.current);
+          }
           setGameOver(true);
           return 0;
         }
@@ -80,6 +82,7 @@ const GamePlay: React.FC<GamePlayProps> = ({ riddles, setLoadingRiddles }) => {
   const resetGame = () => {
     setScore(0);
     setCurrentKeyIndex(0);
+    // @ts-ignore
     setCurrentKeyIndex((prevIndex) => {
       const newIndex = 0;
 
@@ -99,7 +102,10 @@ const GamePlay: React.FC<GamePlayProps> = ({ riddles, setLoadingRiddles }) => {
 
   useEffect(() => {
     startTimer();
-    return () => clearInterval(timerId.current);
+    if (timerId.current) {
+      // @ts-ignore
+      return () => clearInterval(timerId.current);
+    }
   }, [resetGame]);
 
   const handleSubmit = (e: React.FormEvent) => {
