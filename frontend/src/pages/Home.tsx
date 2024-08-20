@@ -30,7 +30,7 @@ const Home = () => {
             <div></div>
           </div>
           {/* RHS */}
-          <div className="p-6">
+          <div className="p-6 mr-auto md:mr-0">
             <Link to="/play">
               <button className="bg-green-400 text-lg md:text-2xl font-bold p-4 md:p-7 shadow-xl btn">
                 Start Playing 🎮
