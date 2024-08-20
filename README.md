@@ -10,17 +10,16 @@ Emoji Riddle is designed to challenge your emoji decoding skills. Each riddle pr
 
 ## Status
 
-🚧 **Emoji Riddle is currently in development.** I am working hard to build an exciting and engaging experience for all players. Stay tuned for updates!
+✨ Emoji Riddle is now live! The game is complete, and you can start testing your emoji skills right away. [Play Emoji Riddle here!](https://emoji-riddle.pages.dev/)
 
-## Features (Planned)
+## Features
 
 - 🧠 **Challenging Riddles:** Decode emojis to solve fun and tricky puzzles.
-- 🏆 **Leaderboard:** Compete with friends and others to top the leaderboard.
 - 🎮 **Easy to Play:** Simple and intuitive gameplay suitable for all ages.
 
 ## Contributing
 
-I appreciate your interest in contributing! At this stage, I am focused on development, but feel free to share your ideas or feedback. I'll provide more details on contributing once the project is further along.
+I appreciate your interest in contributing! While the core features are complete, I’m always open to feedback and ideas for future improvements.
 
 ## Contact
 
@@ -28,4 +27,4 @@ If you have any questions or feedback, feel free to reach out! I'd love to hear 
 
 ---
 
-Thanks for checking out **Emoji Riddle**! Keep an eye out for updates, and get ready to test your emoji skills soon! 🎉
+Thanks for checking out Emoji Riddle! Dive in and start guessing – can you solve them all? 🎉
